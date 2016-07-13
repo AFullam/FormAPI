@@ -1,18 +1,29 @@
-/*global $,console */
+/*global $,console*/
+/*jslint node: true*/
+
 var form;
-var test = "test";
+var id;
 
-(function () {
-    "use strict";
+form = {
+    id: "",
+    form_fields: "",
+    form_init: function (form_details) {
+        "use strict";
+        var item;
+        this.id = form_details.id;
 
-    form = {
-        id: "id",
-        form_fields: "test",
-        form_init: function () {
-            console.log("Form Init");
-        },
-        form_attach: function () {
-            console.log("Form Attach");
+        for (item in form_details.form_fields) {
+            if (form_details.form_fields.hasOwnProperty(item)) {
+                var type = form_details.form_fields[item].type;
+                var size = form_details.form_fields[item].size;
+                var id = form_details.form_fields[item].name;
+
+                $("#init-form").append("<p>" + id + ": <input type='" + type +
+                                   "' size=" + size +
+                                   "' name=" + id +
+                                   "' id='" + id +
+                                   "'></input></p>");
+            }
         }
-    };
-}());
+    }
+};
